@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Premium Account</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#0b1220,#020617);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+
+.card{
+  width:100%;
+  max-width:380px;
+  background:#020617;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 0 40px rgba(0,255,150,0.15);
+}
+
+.title{
+  text-align:center;
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.features{
+  font-size:14px;
+  line-height:1.8;
+}
+
+.features span{
+  display:block;
+}
+
+.old{
+  text-align:center;
+  text-decoration:line-through;
+  color:#9ca3af;
+  margin-top:10px;
+}
+
+.price{
+  text-align:center;
+  font-size:48px;
+  color:#22c55e;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  background:#22c55e;
+  border:none;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#16a34a;
+}
+
+.payment{
+  display:none;
+  margin-top:20px;
+  text-align:center;
+}
+
+.payment img{
+  width:100%;
+  border-radius:12px;
+}
+
+.timer{
+  margin-top:10px;
+  font-size:18px;
+  color:#facc15;
+}
+
+.utr{
+  margin-top:6px;
+  font-size:16px;
+  color:#38bdf8;
+}
+
+.expired{
+  margin-top:8px;
+  color:#f87171;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div class="title">🚀 WHATSAPP NUMBER</div>
+
+  <div class="features">
+    <span>🇮🇳 Indian Number – Fully Verified</span>
+    <span>🔒 Premium Quality (Safe & Secure)</span>
+    <span>🚫 Never Gets Banned</span>
+    <span>💬 Message Anyone – No Limits</span>
+    <span>🙈 Number Will NOT Show</span>
+    <span>📱 Works on Android / iOS / PC</span>
+    <span>♾ Lifetime Validity</span>
+  </div>
+
+  <div class="old">₹999</div>
+  <div class="price">₹30</div>
+
+  <button onclick="buyNow()">BUY NOW</button>
+
+  <!-- Payment Section -->
+  <div class="payment" id="paymentBox">
+    <!-- 🔴 Yaha apni image ka link daalna -->
+    <img src="images/qr.png">
+
+    <div class="timer">
+      Time Left: <span id="time">15</span> sec
+    </div>
+
+    <div class="utr">
+      UTR: <span id="utr"></span>
+    </div>
+
+    <div class="expired" id="expired"></div>
+  </div>
+
+</div>
+
+<script>
+let interval;
+
+function generateUTR(){
+  let u="";
+  for(let i=0;i<12;i++){
+    u+=Math.floor(Math.random()*10);
+  }
+  return u;
+}
+
+function buyNow(){
+  document.getElementById("paymentBox").style.display="block";
+  document.getElementById("utr").innerText = generateUTR();
+  document.getElementById("expired").innerText = "";
+
+  let t=15;
+  document.getElementById("time").innerText=t;
+
+  clearInterval(interval);
+  interval=setInterval(()=>{
+    t--;
+    document.getElementById("time").innerText=t;
+    if(t<=0){
+      clearInterval(interval);
+      document.getElementById("expired").innerText="⛔ Time Expired, Buy Again";
+    }
+  },1000);
+}
+</script>
+
+</body>
+</html>
